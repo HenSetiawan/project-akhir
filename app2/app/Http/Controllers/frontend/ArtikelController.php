@@ -4,7 +4,7 @@ namespace App\Http\Controllers\frontend;
 use App\Http\Controllers\controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use App\Models\Artikel;
+use App\Models\artikel;
 use App\Models\KatArtikel;
 
 class ArtikelController extends Controller
@@ -12,7 +12,7 @@ class ArtikelController extends Controller
 
     public function index()
     {
-        // $artikel = Artikel::orderBy('tanggal', 'desc')->paginate(2);
+        // $artikel = artikel::orderBy('tanggal', 'desc')->paginate(2);
         $artikel = DB::table('artikel')->join('kategori_artikel', 'kategori_artikel.id_ktg', '=', 'artikel.id_ktg')
         ->orderBy('id_artikel','desc')
         ->where('status','=','tampil')
@@ -61,8 +61,8 @@ class ArtikelController extends Controller
     }
 
     public function detail($id) {
-        // $artikel2 = Artikel::orderBy('tanggal', 'desc')->paginate(2);
-        $artikel2 = Artikel::join('kategori_artikel', 'kategori_artikel.id_ktg', '=', 'artikel.id_ktg')
+        // $artikel2 = artikel::orderBy('tanggal', 'desc')->paginate(2);
+        $artikel2 = artikel::join('kategori_artikel', 'kategori_artikel.id_ktg', '=', 'artikel.id_ktg')
         ->where('artikel.id_artikel','!=',$id)
         ->paginate(2);
         $artikel = DB::table('artikel')->join('kategori_artikel', 'kategori_artikel.id_ktg', '=', 'artikel.id_ktg')->where('id_artikel',$id)->first();
